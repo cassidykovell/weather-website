@@ -26,3 +26,10 @@ h2 {
     border-radius: 20px;
 
 }
+
+.background {
+    background: linear-gradient(
+        rgb(245, 170, 245) 0%,
+        rgba(246, 248, 125, 0.936) 100%
+    );
+}
