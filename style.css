@@ -24,6 +24,7 @@ h2 {
         rgba(246, 248, 125, 0.936) 100%
     );
     border-radius: 20px;
+    height: 175px;
 
 }
 
@@ -33,3 +34,20 @@ h2 {
         rgba(246, 248, 125, 0.936) 100%
     );
 }
+
+.list-item {
+    font-family: 'Rubik Bubbles', system-ui;
+    font-size: 20px;
+    padding: 10px;
+    color: rgb(247, 247, 222);
+    background: linear-gradient(
+        rgb(245, 170, 245) 0%,
+        rgba(246, 248, 125, 0.936) 100%
+    );
+    border-radius: 10px;
+    width: 100%;
+}
+
+#five-day .col {
+    margin-bottom: 0;
+  }
