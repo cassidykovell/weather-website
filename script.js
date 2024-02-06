@@ -1,3 +1,4 @@
+//naming all of my global variables 
 var searchBtn = document.getElementById("getWeather");
 var cityInput = document.getElementById("searchInput");
 var todayTemp = document.getElementById('today-temp');
@@ -9,6 +10,7 @@ var previousCities = [];
 
 var APIKey = "bfc41f2a23f49b411a509bc0b6a9d463";
 
+//this function fetches the data from the weather API and returns it to my webpage 
 function fetchWeatherData(cityToSearch) {
   var cityName = cityToSearch
   var cordinateAPIUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&appid=${APIKey}`;
@@ -34,6 +36,7 @@ function fetchWeatherData(cityToSearch) {
     });
 }
 
+//in this function I am selecting what part of the data I want and displaying it within the website for the current day as well as displaying the current date 
 function weatherInfo(weatherForecastData) {
     var todaysTemperature = weatherForecastData.list[0].main.temp;
     var todaysWind = weatherForecastData.list[0].wind.speed;
@@ -48,6 +51,7 @@ function weatherInfo(weatherForecastData) {
     todayHum.innerHTML = `Humidity: ${todaysHumidity} %`;
   }
 
+//in this function I am getting the data needed for the following five days and runnning it through a for loop so that each day for five days is layed out and adding dates to each of those days
   function fiveDayForcast(weatherForecastData) {
     var fiveDay = document.getElementById('five-day');
     fiveDay.innerHTML = '';
@@ -76,10 +80,10 @@ function weatherInfo(weatherForecastData) {
     }
   }
 
+//in this function I am displaying previous cities that the user has searched and adding an event listener so that if one of the previous city list items is clicked the data for that city will re-display 
   function displayPreviousCities() {
     var previousCitiesList = document.getElementById('previousCities');
     previousCitiesList.innerHTML = '';
-    // previousCitiesList.style.margin = '0';
     previousCitiesList.style.padding = '0';
   
     var storedCities = localStorage.getItem('previousCities');
@@ -99,6 +103,7 @@ function weatherInfo(weatherForecastData) {
     }
   }
 
+//this is the event listener for the original city input so that the user can put in a city and get the weather information about it 
 searchBtn.addEventListener("click", function () {
   var city = cityInput.value; 
   fetchWeatherData(city);
@@ -109,4 +114,5 @@ searchBtn.addEventListener("click", function () {
   displayPreviousCities();
 });
 
+//calling this function so that previous cities in local storage are shown when laoding the page
 displayPreviousCities()
