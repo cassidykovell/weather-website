@@ -9,8 +9,8 @@ var previousCities = [];
 
 var APIKey = "bfc41f2a23f49b411a509bc0b6a9d463";
 
-function fetchWeatherData() {
-  var cityName = cityInput.value;
+function fetchWeatherData(cityToSearch) {
+  var cityName = cityToSearch
   var cordinateAPIUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&appid=${APIKey}`;
 
   fetch(cordinateAPIUrl)
@@ -42,7 +42,7 @@ function weatherInfo(weatherForecastData) {
     var today = new Date();
     var date = today.toLocaleDateString();
   
-    city.innerHTML = cityInput.value + `<img src="https://openweathermap.org/img/wn/${icon}.png" alt="weather icon"> (${date})`;
+    city.innerHTML = weatherForecastData.city.name + `<img src="https://openweathermap.org/img/wn/${icon}.png" alt="weather icon"> (${date})`;
     todayTemp.innerHTML = `Temperature: ${todaysTemperature}°C`;
     todayWind.innerHTML = `Wind: ${todaysWind} M/S`;
     todayHum.innerHTML = `Humidity: ${todaysHumidity} %`;
@@ -79,7 +79,7 @@ function weatherInfo(weatherForecastData) {
   function displayPreviousCities() {
     var previousCitiesList = document.getElementById('previousCities');
     previousCitiesList.innerHTML = '';
-    previousCitiesList.style.margin = '0';
+    // previousCitiesList.style.margin = '0';
     previousCitiesList.style.padding = '0';
   
     var storedCities = localStorage.getItem('previousCities');
@@ -94,18 +94,19 @@ function weatherInfo(weatherForecastData) {
   
       previousCitiesList.addEventListener('click', function(event) {
         var clickedCity = event.target.textContent;
-        fetchWeatherData(clickedCity, function(weatherForecastData) {
-          weatherInfo(weatherForecastData);
-          fiveDayForcast(weatherForecastData);
-        });
+        fetchWeatherData(clickedCity);
       });
     }
   }
 
 searchBtn.addEventListener("click", function () {
-  fetchWeatherData();
-  var city = cityInput.value;
-  previousCities.push(city);
-  localStorage.setItem('previousCities', JSON.stringify(previousCities));
+  var city = cityInput.value; 
+  fetchWeatherData(city);
+   if (!previousCities.includes(city)) {
+    previousCities.push(city)
+    localStorage.setItem('previousCities', JSON.stringify(previousCities));
+   }
   displayPreviousCities();
 });
+
+displayPreviousCities()
