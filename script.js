@@ -13,7 +13,7 @@ var APIKey = "bfc41f2a23f49b411a509bc0b6a9d463";
 //this function fetches the data from the weather API and returns it to my webpage 
 function fetchWeatherData(cityToSearch) {
   var cityName = cityToSearch
-  var cordinateAPIUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&appid=${APIKey}`;
+  var cordinateAPIUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${cityName}&appid=${APIKey}`;
 
   fetch(cordinateAPIUrl)
     .then(function (response) {
